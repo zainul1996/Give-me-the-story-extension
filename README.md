@@ -1,1 +1,1 @@
-# Give-me-the-story-extension
+# give-me-the-story-extension
