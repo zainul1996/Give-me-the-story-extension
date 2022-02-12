@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Give me the story</title>
-</head>
+  </head>
 
-<body>
-    <h1>Welcome to our landing page !!</h1>
-</body>
+  <body style="background-color: #9fb8ad" class="main">
+    <section class="section">
+      <h1 class="title" style="text-transform: capitalize">GMTS: {{text}}</h1>
+      <div class="timeline is-centered">
+        <header class="timeline-header">
+          <span class="tag is-medium is-primary">Start</span>
+        </header>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <p class="heading">January 2016</p>
+            <p>Timeline content - Can include any HTML element</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <p class="heading">February 2016</p>
+            <p>Timeline content - Can include any HTML element</p>
+          </div>
+        </div>
+        <header class="timeline-header">
+          <span class="tag is-primary">2017</span>
+        </header>
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fa fa-flag"></i>
+          </div>
+          <div class="timeline-content">
+            <p class="heading">March 2017</p>
+            <p>Timeline content - Can include any HTML element</p>
+          </div>
+        </div>
+        <div class="timeline-header">
+          <span class="tag is-medium is-primary">End</span>
+        </div>
+      </div>
 
+      <!-- {% for article in articles %}
+      <p>{{ article['title'] }}</p>
+      {% endfor %} -->
+    </section>
+
+    <footer class="footer" style="background-color: #ced0ce">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Give me the story</strong> by
+          <a href="https://jgthms.com">Rush Hour 2022</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+
+  <link rel="stylesheet" href="../static/css/main.css" />
+  <link rel="stylesheet" href="../static/node_modules/bulma/css/bulma.css" />
+  <link
+    rel="stylesheet"
+    href="../static/node_modules/bulma-timeline/dist/css/bulma-timeline.min.css"
+  />
 </html>

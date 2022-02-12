@@ -62,6 +62,9 @@ def helloworld():
 def site():
     text = request.args.get("text")
     keywords = keyextraction.extract_key(text)
+
+    print(keywords)
+
     string = ""
     for word in keywords:
         string += word + "<br>"
@@ -69,26 +72,29 @@ def site():
     string += definition.wiki_extract(text) + "<br>"
     string += definition.dictionary_extract(text) + "<br>"
 
-    news = googlenews.run(keywords)
-    print(news)
+    articles = googlenews.run(keywords)
 
-    return string
+    return render_template("index.html", text=text, string=string, articles=articles)
 
 
 @app.route("/iframe")
 def iframe():
     text = request.args.get("text")
     keywords = keyextraction.extract_key(text)
-    res = ""
-    res += definition.wiki_extract(text) + "<br>"
-    res += definition.dictionary_extract(text) + "<br>"
+    # articles = googlenews.run(keywords)
 
-    for word in keywords:
-        res += word + "<br>"
+    # if (articles[0][0] != None):
+    #     return articles[0][0]['summary']
 
-    return res
+    dictionary_definition = definition.dictionary_extract(text)
+    if (dictionary_definition != None):
+        return dictionary_definition
+
+    wiki_definition = definition.wiki_extract(text)
+    if (wiki_definition != None):
+        return wiki_definition
 
 
 if __name__ == "__main__":
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(debug=True, threaded=True, port=5000)

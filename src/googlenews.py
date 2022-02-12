@@ -3,11 +3,10 @@ import json
 
 from gnews import GNews
 
-reliable_sources_href = [
-    "https://www.channelnewsasia.com",
-    "https://www.straitstimes.com",
-    "https://www.bloomberg.com",
-]
+google_news = GNews(language='en', country='SG',
+                    period='2y',
+                    exclude_websites=[
+                        'theindependent.sg', 'malaymail.com'])
 
 unreliable_sources_href = [
     "https://mothership.sg"
@@ -36,7 +35,6 @@ def sortByScore(news):
 def getNews(keywords=[]):
     if len(keywords) > 0:
         search_keyword = " ".join(str(x) for x in keywords)
-        google_news = GNews()
         news = google_news.get_news(search_keyword)
 
         return news
@@ -68,4 +66,4 @@ def run(mode, keywords=[]):
         news = groupByYear(news)
         return news
     else:
-        return "No keywords provided"
+        return {}
