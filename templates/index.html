@@ -8,9 +8,17 @@
   </head>
 
   <body>
-    <h1>{{text}}</h1>
-    {% for article in articles %}
-    <h3>{{ article['title'] }}</h3>
-    {% endfor %}
+    <section class="section">
+      <h1 class="title" style="text-transform: capitalize">{{text}}</h1>
+      {% for article in articles %}
+      <p>{{ article['title'] }}</p>
+      {% endfor %}
+    </section>
   </body>
+
+  <link rel="stylesheet" href="../static/node_modules/bulma/css/bulma.css" />
+  <link
+    rel="stylesheet"
+    href="../static/node_modules/bulma-timeline/dist/css/bulma-timeline.min.css"
+  />
 </html>
