@@ -36,7 +36,7 @@ def sortByScore(news):
 def getNews(keywords=[]):
     if len(keywords) > 0:
         search_keyword = " ".join(str(x) for x in keywords)
-        google_news = GNews()
+        google_news = GNews(language='en', country='SG', period='2y')
         news = google_news.get_news(search_keyword)
 
         return news
