@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from src import definition, googlenews, keyextraction
 
 app = Flask(__name__)
 
@@ -55,6 +56,37 @@ def index():
 @app.route("/helloworld")
 def helloworld():
     return render_template("index.html")
+
+
+@app.route("/site")
+def site():
+    text = request.args.get("text")
+    keywords = keyextraction.extract_key(text)
+    string = ""
+    for word in keywords:
+        string += word + "<br>"
+
+    string += definition.wiki_extract(text) + "<br>"
+    string += definition.dictionary_extract(text) + "<br>"
+
+    news = googlenews.run(keywords)
+    print(news)
+
+    return string
+
+
+@app.route("/iframe")
+def iframe():
+    text = request.args.get("text")
+    keywords = keyextraction.extract_key(text)
+    res = ""
+    res += definition.wiki_extract(text) + "<br>"
+    res += definition.dictionary_extract(text) + "<br>"
+
+    for word in keywords:
+        res += word + "<br>"
+
+    return res
 
 
 if __name__ == "__main__":
