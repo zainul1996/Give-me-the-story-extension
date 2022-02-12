@@ -63,31 +63,14 @@ def site():
     text = request.args.get("text")
     keywords = keyextraction.extract_key(text)
 
-    print(keywords)
+    articles = googlenews.run("news", keywords)
 
-    string = ""
-    for word in keywords:
-        string += word + "<br>"
-
-    string += definition.wiki_extract(text) + "<br>"
-    string += definition.dictionary_extract(text) + "<br>"
-
-    articles = googlenews.run(keywords)
-
-    return render_template("index.html", text=text, string=string, articles=articles)
+    return render_template("index.html", text=text, articles=articles)
 
 
 @app.route("/iframe")
 def iframe():
     text = request.args.get("text")
-    keywords = keyextraction.extract_key(text)
-    # articles = googlenews.run(keywords)
-
-    # if (articles[0][0] != None):
-    #     return articles[0][0]['summary']
-
-
-
     dictionary_definition = definition.dictionary_extract(text)
     if (dictionary_definition != None):
         return dictionary_definition

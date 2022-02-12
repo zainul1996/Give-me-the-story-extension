@@ -1,9 +1,23 @@
 .main {
   display: flex;
   height: 100vh;
+  overflow: hidden;
   flex-direction: column;
+}
+
+.timeline {
+  height: 80vh;
+  overflow: scroll;
+}
+
+.timeline::-webkit-scrollbar {
+  display: none;
 }
 
 .section {
   flex: 1;
+}
+
+.box {
+  background-color: E6E8E6;
 }
