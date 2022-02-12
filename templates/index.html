@@ -9,7 +9,9 @@
 
   <body style="background-color: #9fb8ad" class="main">
     <section class="section">
-      <h1 class="title" style="text-transform: capitalize">GMTS: {{text}}</h1>
+      <h1 class="title" style="text-transform: capitalize; color: #3f403f">
+        GMTS: {{text}}
+      </h1>
 
       <div class="timeline is-centered">
         {% for year in articles %}
@@ -21,7 +23,9 @@
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <p class="heading">{{ article['published date'][:-13]}}</p>
-            <p>{{ article['title'] }}</p>
+            <div class="box">
+              <a href="{{article['url']}}">{{ article['title'] }}</a>
+            </div>
           </div>
         </div>
         {% endfor %} {% endfor %}
@@ -40,7 +44,9 @@
       <div class="content has-text-centered">
         <p>
           <strong>Give me the story</strong> by
-          <a href="https://jgthms.com">Rush Hour 2022</a>.
+          <a href="https://github.com/zainul1996/give-me-the-story-extension"
+            >Rush Hour 2022</a
+          >.
         </p>
       </div>
     </footer>
