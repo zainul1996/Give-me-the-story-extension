@@ -86,6 +86,8 @@ def iframe():
     # if (articles[0][0] != None):
     #     return articles[0][0]['summary']
 
+
+
     dictionary_definition = definition.dictionary_extract(text)
     if (dictionary_definition != None):
         return dictionary_definition
