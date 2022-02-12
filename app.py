@@ -65,16 +65,12 @@ def site():
 
     print(keywords)
 
-    string = ""
-    for word in keywords:
-        string += word + "<br>"
+    articles = googlenews.run("news", keywords)
 
-    string += definition.wiki_extract(text) + "<br>"
-    string += definition.dictionary_extract(text) + "<br>"
+    print(articles)
+    print("hello")
 
-    articles = googlenews.run(keywords)
-
-    return render_template("index.html", text=text, string=string, articles=articles)
+    return render_template("index.html", text=text, articles=articles)
 
 
 @app.route("/iframe")
