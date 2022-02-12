@@ -5,7 +5,7 @@
 This project aims to create a google chrome extension that would allow users to highlight article titles and cross check the validity of the title with other sources:
 
 Main features:
-- Providing a quick preview of how reliable the article is with a reliablity label ✅
+- Providing a quick preview of how reliable the article is with a reliablity label
 - Shows sources of other articles by reliable/not so reliable sources
 	- Reliable sources would hold a higher weight when deciding on the reliability label
 - Summary of sources would also be given on a seperate website in order for the user to quickly read them
