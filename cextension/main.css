@@ -1,0 +1,33 @@
+#highlightDialog {
+  right: 2.5vh;
+  top: 2.5vh;
+  bottom: 2.5vh;
+  width: 25vw;
+  height: 90vh;
+  position: fixed;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0px 0 1px rgba(10, 10, 10, 0.02);
+  padding: 1.25rem;
+  z-index: 10000;
+}
+
+#selectedText {
+  color: #363636;
+  font-weight: 600;
+  line-height: 1.125;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.modalFooter {
+  height: 5%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  text-align: center;
+  color: black;
+}
