@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from gnews import GNews
 
@@ -34,6 +35,16 @@ def getNews(keywords=[]):
         news = google_news.get_news(search_keyword)
 
         return news
+
+def getRootNews(news):
+    # parse every items 'published date' string in 'Fri, 12 Nov 2021 08:00:00 GMT' format to datetime object
+    for item in news:
+        item["formatted published date"] = datetime.datetime.strptime(item["published date"], "%a, %d %b %Y %H:%M:%S %Z")
+    
+    # sort news by 'published date'
+    news = sorted(news, key=lambda k: k["formatted published date"], reverse=False)
+    
+    return news[0]
 
 
 def run(keywords=[]):
