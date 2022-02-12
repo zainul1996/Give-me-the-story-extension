@@ -48,7 +48,7 @@ def post_something():
 # A welcome message to test our server
 @app.route("/")
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return "<h1>Hello World !!</h1>"
 
 
 # Renders a html file from the templates folder
