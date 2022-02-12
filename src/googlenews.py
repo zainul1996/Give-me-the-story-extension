@@ -3,18 +3,13 @@ import json
 
 from gnews import GNews
 
-reliable_sources_href = [
-    "https://www.channelnewsasia.com",
-    "https://www.straitstimes.com",
-    "https://www.bloomberg.com",
-]
+google_news = GNews(language='en', country='SG',
+                    period='2y',
+                    exclude_websites=[
+                        'theindependent.sg', 'malaymail.com'])
 
 
-def filterReliableNews(news):
-    return [item for item in news if item["publisher"]["href"] in reliable_sources_href]
-
-
-def filterMatched(news, keywords):
+def score(news, keywords):
     for item in news:
         item["score"] = 0
         for keyword in keywords:
@@ -31,7 +26,6 @@ def sortByScore(news):
 def getNews(keywords=[]):
     if len(keywords) > 0:
         search_keyword = " ".join(str(x) for x in keywords)
-        google_news = GNews()
         news = google_news.get_news(search_keyword)
 
         return news
@@ -45,15 +39,15 @@ def getRootNews(news):
         )
 
     # sort news by 'published date'
-    news = sorted(news, key=lambda k: k["formatted published date"], reverse=False)
+    news = sorted(
+        news, key=lambda k: k["formatted published date"], reverse=False)
 
     return news[0]
 
 
-def run(keywords=[]):
+def run(keywords=[]) -> dict:
     if len(keywords) > 0:
         search_keyword = " ".join(str(x) for x in keywords)
-        google_news = GNews()
         news = google_news.get_news(search_keyword)
 
         for item in news:
@@ -63,10 +57,11 @@ def run(keywords=[]):
                     item["score"] += 1
 
         news = getNews(keywords)
-        news = filterMatched(news, keywords)
+        # news = filterMatched(news, keywords)
+        news = score(news, keywords)
         news = sortByScore(news)
-        news = filterReliableNews(news)
+        # news = filterReliableNews(news)
 
         return news
     else:
-        return "No keywords provided"
+        return {}

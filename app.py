@@ -62,6 +62,9 @@ def helloworld():
 def site():
     text = request.args.get("text")
     keywords = keyextraction.extract_key(text)
+
+    print(keywords)
+
     string = ""
     for word in keywords:
         string += word + "<br>"
@@ -69,10 +72,9 @@ def site():
     string += definition.wiki_extract(text) + "<br>"
     string += definition.dictionary_extract(text) + "<br>"
 
-    news = googlenews.run(keywords)
-    print(news)
+    articles = googlenews.run(keywords)
 
-    return string
+    return render_template("index.html", text=text, string=string, articles=articles)
 
 
 @app.route("/iframe")
