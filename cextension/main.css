@@ -1,11 +1,11 @@
 #highlightDialog {
   right: 2.5vh;
-  top: 2.5vh;
-  bottom: 2.5vh;
+  top: 5vh;
+  bottom: 5vh;
   width: 25vw;
   height: 90vh;
   position: fixed;
-  background-color: white;
+  background-color: #e8e6e8;
   border-radius: 6px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
     0 0px 0 1px rgba(10, 10, 10, 0.02);
@@ -21,8 +21,16 @@
   margin-bottom: 0.5em;
 }
 
+#GMTS_Form .button {
+  width: 95%;
+}
+
+#GMTS_Form .input {
+  width: 95%;
+}
+
 .modalFooter {
-  height: 5%;
+  height: 10%;
   width: 100%;
   position: absolute;
   bottom: 0px;

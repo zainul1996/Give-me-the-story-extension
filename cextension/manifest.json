@@ -16,7 +16,7 @@
     {
       "run_at": "document_idle",
       "js": ["after.js"],
-      "css": ["main.css"],
+      "css": ["bulma.min.css", "main.css"],
       "html": ["main.html"],
       "matches": ["https://*/*", "http://*/*"]
     }
