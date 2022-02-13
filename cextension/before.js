@@ -371,7 +371,7 @@ function openModal(modal) {
     posTable.innerHTML +=
       `
       <tr>
-      <td><a href=` +
+      <td><a target="_blank" href=` +
       string +
       `>` +
       string +
@@ -387,7 +387,7 @@ function openModal(modal) {
     negTable.innerHTML +=
       `
       <tr>
-      <td><a href=` +
+      <td><a target="_blank" href=` +
       string +
       `>` +
       string +

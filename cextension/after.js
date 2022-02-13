@@ -1,6 +1,11 @@
 // this code will be executed after page load
 (function () {
   console.log("after.js executed");
+  const popup = document.createElement("div");
+  popup.id = "snackbar";
+  document.body.appendChild(popup);
+
+
 
   const modal = document.createElement("div");
   modal.className = "GMTS_Modal";
@@ -154,7 +159,7 @@ $("#submit").click(function () {
     posTable.innerHTML +=
       `
       <tr>
-      <td><a href=` +
+      <td><a target="_blank" href=` +
       url +
       `>` +
       url +
@@ -167,7 +172,7 @@ $("#submit").click(function () {
     negTable.innerHTML +=
       `
       <tr>
-      <td><a href=` +
+      <td><a target="_blank" href=` +
       url +
       `>` +
       url +

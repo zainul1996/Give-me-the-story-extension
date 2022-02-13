@@ -13,6 +13,10 @@
   if (!toggle) {
     // if there is at least one highlighted word
     toggle = true;
+    var x = document.getElementById("snackbar");
+    x.innerHTML = "Toggled on GMTS";
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
     if (hiddenhighlights) {
       $(".nlh").each(function () {
         $(this).addClass("hl");
@@ -43,6 +47,10 @@
   }
   else {
     toggle = false;
+    var x = document.getElementById("snackbar");
+    x.innerHTML = "Toggled off GMTS";
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
     closeModal(document.getElementById("highlightDialog"));
     $(".hl").each(function () {
       $(this).removeClass("hl");

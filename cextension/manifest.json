@@ -1,11 +1,16 @@
 {
-  "name": "Highlight context menu",
-  "description": "Show context menu after highlighting text",
+  "name": "GMTS",
+  "description": "Gets you all the stories and sources.",
   "homepage_url": "https://google.com",
   "version": "2.0.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "Highlighted Context Menu"
+    "default_title": "GMTS"
+  },
+  "icons": {
+    "128": "icon128.png",
+    "64": "icon64.png",
+    "16": "icon16.png"
   },
   "content_scripts": [
     {
@@ -15,7 +20,8 @@
         "before.js"
       ],
       "css": [
-        "highlight.css"
+        "highlight.css",
+        "toast.css"
       ],
       "matches": [
         "https://*/*",
