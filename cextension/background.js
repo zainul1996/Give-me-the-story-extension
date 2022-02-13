@@ -16,7 +16,7 @@ async function getTabId() {
 
 var menuItem = {
   "id": "Fake Test",
-  "title": "Fake Test",
+  "title": "Give me the stories",
   "contexts": ["selection"]
 };
 
@@ -28,9 +28,9 @@ function fixedEncodeURI(str) {
 
 chrome.contextMenus.onClicked.addListener(function (clickData) {
   if (clickData.menuItemId == "Fake Test" && clickData.selectionText) {
-    var wikiUrl = "https://en.wikipedia.org/wiki/" + fixedEncodeURI(clickData.selectionText);
+    var url = "https://code.peikai.pii.at/site?text=" + fixedEncodeURI(clickData.selectionText);
     var createData = {
-      "url": wikiUrl,
+      "url": url,
       "type": "popup",
       "top": 5,
       "left": 5,
