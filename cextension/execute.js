@@ -52,8 +52,16 @@ function closeModal(modal) {
 }
 
 function submitToFirebase() {
-  //console.log(document.getElementById("backings").value);
-  //insertBaseDocument("greetings",document.getElementById("backings").value,"https://code.peikai.pii.at/iframe?text=hello");
+  // get value of truth selection
+  var truth = document.getElementById("GMTS_Form_Truth").value;
+  // get url
+  var url = document.getElementById("GMTS_Form_URL").value;
+  // validity check
+  if (!url.includes("ieee")) {
+    alert("Invalid source. Use only sources from ieee.");
+    return;
+  }
+  // TODO: Uncomment
   checkExisting();
 }
 
@@ -151,7 +159,7 @@ function checkExisting() {
       console.log("dont_exist");
       insertBaseDocument(
         "highlighted text",
-        document.getElementById("backings").value,
+        document.getElementById("GMTS_Form_URL").value,
         document.URL
       );
     })
