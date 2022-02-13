@@ -7,7 +7,7 @@
   modal.setAttribute("id", "highlightDialog");
   modal.innerHTML = `
   <label class='switch'> <input type='checkbox' checked> <span class='slider round'></span></label>
-  <input type='text' id='fname' name='fname'>
+  <input type='text' id='backings' name='backings'>
   <button type='button' id='submit' name='submit'>Submit</button>
   <div class=modalFooter>
   <strong>Give Me The Source</strong> <br>by RushHour2022
