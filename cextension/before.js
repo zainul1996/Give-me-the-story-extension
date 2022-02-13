@@ -193,6 +193,7 @@ function checkExisting() {
 
               appendDocument(JSON.stringify({ "fields": obj.documents[x].fields }))
               deleteDocument(obj.documents[x].name)
+              document.getElementById("GMTS_Form_URL").value="";
               return;
             }
           }
@@ -249,11 +250,13 @@ function checkExisting() {
           console.log(obj.documents[x].fields.backings.arrayValue.values)
           appendDocument(JSON.stringify({ "fields": obj.documents[x].fields }))
           deleteDocument(obj.documents[x].name)
+          document.getElementById("GMTS_Form_URL").value="";
           return;
         }
       }
       console.log("dont_exist")
       insertBaseDocument(lastHighlightedText, document.getElementById("GMTS_Form_URL").value, document.URL)
+      document.getElementById("GMTS_Form_URL").value="";
     })
     .catch((error) => console.log("error", error));
 }
