@@ -1,7 +1,7 @@
 // this code will be executed when the extension's button is clicked
 (function () {
   console.log("execute.js executed");
-  document.getElementById("submit").addEventListener("click", submitToFirebase);
+  //document.getElementById("submit").addEventListener("click", submitToFirebase);
 
   const modal = document.getElementById("highlightDialog");
   if (modal && modal.style.display == "none") {
@@ -51,16 +51,16 @@ function closeModal(modal) {
   modal.style.display = "none";
 }
 
-function submitToFirebase() {
-  // get value of truth selection
-  var truth = document.getElementById("GMTS_Form_Truth").value;
-  // get url
-  var url = document.getElementById("GMTS_Form_URL").value;
-  // validity check
-  if (!url.includes("ieee")) {
-    alert("Invalid source. Use only sources from ieee.");
-    return;
-  }
-  // TODO: Uncomment
-  checkExisting();
-}
+// function submitToFirebase() {
+//   // get value of truth selection
+//   var truth = document.getElementById("GMTS_Form_Truth").value;
+//   // get url
+//   var url = document.getElementById("GMTS_Form_URL").value;
+//   // validity check
+//   if (!url.includes("ieee")) {
+//     alert("Invalid source. Use only sources from ieee.");
+//     return;
+//   }
+//   // TODO: Uncomment
+//   checkExisting();
+// }
