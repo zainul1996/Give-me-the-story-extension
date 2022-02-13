@@ -3,15 +3,62 @@
   console.log("after.js executed");
 
   const modal = document.createElement("div");
-  modal.className = "box";
+  modal.className = "GMTS_Modal";
   modal.setAttribute("id", "highlightDialog");
   modal.innerHTML = `
-  <label class='switch'> <input type='checkbox' checked> <span class='slider round'></span></label>
-  <input type='text' id='fname' name='fname'>
-  <button type='button' id='submit' name='submit'>Submit</button>
-  <div class=modalFooter>
-  <strong>Give Me The Source</strong> <br>by RushHour2022
+  <div class=box>
+
+    <table class="table" id="pos_table">
+      <thead>
+        <tr>
+          <th>For</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        
+      </tbody>
+    </table>
+
   </div>
+
+  <div class=box>
+    <table class="table" id="neg_table">
+      <thead>
+        <tr>
+          <th>Against</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+
+    <div id="GMTS_Form" class=box>
+      <h3 class="subtitle is-size-5">
+          Add new source for 
+          <select id="Truth" name="truth">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>:
+      </h3>
+
+      <div class="has-text-centered">
+        <label for="Truth">
+          <input class="input is-right" type='text' id='fname' name='fname'>
+        </label>
+        <br>
+        <button class="button is-small is-right" type='button' id='submit' name='submit'>Submit</button>
+      </div>
+    </div>
+
+    <div class=modalFooter>
+      <p class=subtitle>
+      <strong>Give Me The Source</strong> <br>by RushHour2022
+      <p>
+    </div>
   `;
 
   document.body.appendChild(modal);
