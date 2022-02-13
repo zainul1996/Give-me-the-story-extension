@@ -78,12 +78,13 @@ $("p, h1, h2, span, em, li").on("mouseup", function () {
     console.log(lastHighlightedText);
     var replacement = $("<span></span>").attr({ class: "hl" }).html(selection);
 
-    openModal(document.getElementById("highlightDialog"));
+
     var replacementHtml = $("<div>")
       .append(replacement.clone())
       .remove()
       .html();
     $(this).html($(this).html().replace(selection, replacementHtml));
+    openModal(document.getElementById("highlightDialog"));
   }
 });
 
