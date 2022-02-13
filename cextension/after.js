@@ -6,30 +6,42 @@
   modal.className = "GMTS_Modal";
   modal.setAttribute("id", "highlightDialog");
   modal.innerHTML = `
-  <div class=box>
-
-    <table class="table" id="pos_table">
-      <thead>
-        <tr>
-          <th>For</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        
+  <p><strong>For</strong></p>
+  <div class="box GMTS_Table">
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+      <tbody id="pos_table">
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
+      <tr><td>hi</td></tr>
       </tbody>
     </table>
 
   </div>
 
-  <div class=box>
-    <table class="table" id="neg_table">
-      <thead>
-        <tr>
-          <th>Against</th>
-        </tr>
-      </thead>
-      
+  <p><strong>Against</strong></p>
+  <div class="box GMTS_Table">
+    <table class="table">
+      <tbody id="neg_table">
       <tbody>
         
       </tbody>
@@ -37,17 +49,17 @@
   </div>
 
     <div id="GMTS_Form" class=box>
-      <h3 class="subtitle is-size-5">
+      <p class="subtitle is-size-5">
           Add new source for 
-          <select id="GMTS_Form_Truth" name="GMTS_Form_Truth">
+          <select id="GMTS_Form_Truth" name="truth">
             <option value="true">True</option>
             <option value="false">False</option>
           </select>:
-      </h3>
+      </p>
 
       <div class="has-text-centered">
         <label for="Truth">
-          <input class="input is-right" type='text' id='GMTS_Form_URL' name='GMTS_Form_URL'>
+          <input class="input is-right" type='text' id='GMTS_Form_URL' name='fname'>
         </label>
         <br>
         <button class="button is-small is-right" type='button' id='submit' name='submit'>Submit</button>
@@ -55,7 +67,7 @@
     </div>
 
     <div class=modalFooter>
-      <p class=subtitle>
+      <p class="subtitle is-size-7">
       <strong>Give Me The Source</strong> <br>by RushHour2022
       <p>
     </div>

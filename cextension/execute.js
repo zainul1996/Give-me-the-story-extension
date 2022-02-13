@@ -52,13 +52,20 @@ function closeModal(modal) {
 }
 
 function submitToFirebase() {
-  //console.log(document.getElementById("backings").value);
-  //insertBaseDocument("greetings",document.getElementById("backings").value,"https://code.peikai.pii.at/iframe?text=hello");
-  checkExisting()
-  //console.log(document.getElementById("GMTS_Form_Truth").value)
+  // get value of truth selection
+  var truth = document.getElementById("GMTS_Form_Truth").value;
+  // get url
+  var url = document.getElementById("GMTS_Form_URL").value;
+  // validity check
+  if (!url.includes("ieee")) {
+    alert("Invalid source. Use only sources from ieee.");
+    return;
+  }
+  // TODO: Uncomment
+  checkExisting();
 }
 
-function insertBaseDocument(highlightedword, backings, currentLink){
+function insertBaseDocument(highlightedword, backings, currentLink) {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -158,16 +165,19 @@ function insertBaseDocument(highlightedword, backings, currentLink){
   
 
   var requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
-  fetch("https://firestore.googleapis.com/v1beta1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+  fetch(
+    "https://firestore.googleapis.com/v1beta1/projects/givemethesource/databases/(default)/documents/Sites",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
 
 function deleteDocument(documentID){
@@ -204,8 +214,8 @@ function appendDocument(jsonRaw){
 
 function checkExisting(){
   var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
+    method: "GET",
+    redirect: "follow",
   };
   
   fetch("https://firestore.googleapis.com/v1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
@@ -301,6 +311,5 @@ function checkExisting(){
       console.log("dont_exist")
       insertBaseDocument("highlighted text",document.getElementById("GMTS_Form_URL").value,document.URL)
     })
-    .catch(error => console.log('error', error));
-    
+    .catch((error) => console.log("error", error));
 }
