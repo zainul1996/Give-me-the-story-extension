@@ -10,29 +10,6 @@
   <div class="box GMTS_Table">
     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
       <tbody id="pos_table">
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
-      <tr><td>hi</td></tr>
       </tbody>
     </table>
 
@@ -90,6 +67,83 @@ function mouseUp() {
     }
   }
 }
+
+console.log(lastHighlightedText);
+$("p, h1, h2, span, em, li").on("mouseup", function () {
+  var selection = getSelectedText();
+  // check if selection is atleast 5 words long
+  if (selection.split(" ").length > 5) {
+    lastHighlightedText = selection;
+    console.log(lastHighlightedText);
+    var replacement = $("<span></span>")
+      .attr({ class: "hl" })
+      .attr({
+        onclick:
+          'document.getElementById("highlightDialog").style.display = "block";return false;',
+      })
+      .html(selection);
+    var replacementHtml = $("<div>")
+      .append(replacement.clone())
+      .remove()
+      .html();
+    $(this).html($(this).html().replace(selection, replacementHtml));
+  }
+});
+
+// if class hl is clicked
+$(".hl").on("click", function () {
+  console.log("clicked");
+  if (document.getElementById("highlightDialog").style.display == "none") {
+    document.getElementById("highlightDialog").style.display = "block";
+  } else {
+    document.getElementById("highlightDialog").style.display = "none";
+  }
+});
+
+//Grab selected text
+function getSelectedText() {
+  if (window.getSelection) {
+    return window.getSelection().toString();
+  } else if (document.getSelection) {
+    return document.getSelection();
+  } else if (document.selection) {
+    return document.selection.createRange().text;
+  }
+}
+
+$("body").keyup(function (e) {
+  if (e.keyCode == 8) {
+    if ($(".hl").length > 0) {
+      removeHighlights();
+    } else {
+      reApplyHighlights();
+    }
+  }
+});
+
+function removeHighlights() {
+  $(".hl").each(function () {
+    $(this).removeClass("hl");
+    $(this).addClass("nlh");
+    $(this).removeAttr("onclick");
+  });
+}
+
+function reApplyHighlights() {
+  $(".nlh").each(function () {
+    $(this).addClass("hl");
+    $(this).removeClass("nlh");
+    $(this).attr("onclick", 'alert("clicked"); return false;');
+  });
+}
+
+$("#submit").click(function () {
+  if (lastHighlightedText != "") {
+    console.log("Checking existing");
+    console.log("preparing to insert" + lastHighlightedText);
+    checkExisting();
+  }
+});
 
 // function openModal(){
 //   const dialog = document.getElementById("highlightDialog");

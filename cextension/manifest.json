@@ -10,20 +10,46 @@
   "content_scripts": [
     {
       "run_at": "document_start",
-      "js": ["before.js"],
-      "matches": ["https://*/*", "http://*/*"]
+      "js": [
+        "before.js",
+        "jquery.js"
+      ],
+      "css": [
+        "highlight.css"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
     },
     {
       "run_at": "document_idle",
-      "js": ["after.js"],
-      "css": ["bulma.min.css", "main.css"],
-      "html": ["main.html"],
-      "matches": ["https://*/*", "http://*/*"]
+      "js": [
+        "after.js"
+      ],
+      "css": [
+        "bulma.min.css",
+        "main.css"
+      ],
+      "html": [
+        "main.html"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
     }
   ],
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "scripting", "contextMenus"],
-  "host_permissions": ["https://*/*", "http://*/*"]
+  "permissions": [
+    "tabs",
+    "scripting",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ]
 }
