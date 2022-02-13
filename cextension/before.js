@@ -1,8 +1,8 @@
 // this code will be executed before page load
 var DATA;
 
-(function() {
-  console.log('before.js executed');
+(function () {
+  console.log("before.js executed");
   retrieveBackings();
 })();
 
@@ -14,98 +14,91 @@ function insertBaseDocument(highlightedword, backings, currentLink) {
 
   if (document.getElementById("GMTS_Form_Truth").value == "true") {
     var raw = JSON.stringify({
-      "fields": {
-        "backings": {
-          "arrayValue": {
-            "values": [
+      fields: {
+        backings: {
+          arrayValue: {
+            values: [
               {
-                "mapValue": {
-                  "fields": {
-                    "negativeBackings": {
-                      "arrayValue": {
-                        "values": [
-
-                        ]
-                      }
+                mapValue: {
+                  fields: {
+                    negativeBackings: {
+                      arrayValue: {
+                        values: [],
+                      },
                     },
-                    "positiveBackings": {
-                      "arrayValue": {
-                        "values": [
+                    positiveBackings: {
+                      arrayValue: {
+                        values: [
                           {
-                            "stringValue": backings
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
+                            stringValue: backings,
+                          },
+                        ],
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
         },
-        "keywords": {
-          "arrayValue": {
-            "values": [
+        keywords: {
+          arrayValue: {
+            values: [
               {
-                "stringValue": highlightedword
-              }
-            ]
-          }
+                stringValue: highlightedword,
+              },
+            ],
+          },
         },
-        "site_name": {
-          "stringValue": currentLink
-        }
-      }
+        site_name: {
+          stringValue: currentLink,
+        },
+      },
     });
-  }
-  else {
+  } else {
     var raw = JSON.stringify({
-      "fields": {
-        "backings": {
-          "arrayValue": {
-            "values": [
+      fields: {
+        backings: {
+          arrayValue: {
+            values: [
               {
-                "mapValue": {
-                  "fields": {
-                    "negativeBackings": {
-                      "arrayValue": {
-                        "values": [
+                mapValue: {
+                  fields: {
+                    negativeBackings: {
+                      arrayValue: {
+                        values: [
                           {
-                            "stringValue": backings
-                          }
-                        ]
-                      }
+                            stringValue: backings,
+                          },
+                        ],
+                      },
                     },
-                    "positiveBackings": {
-                      "arrayValue": {
-                        "values": [
-
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
+                    positiveBackings: {
+                      arrayValue: {
+                        values: [],
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
         },
-        "keywords": {
-          "arrayValue": {
-            "values": [
+        keywords: {
+          arrayValue: {
+            values: [
               {
-                "stringValue": highlightedword
-              }
-            ]
-          }
+                stringValue: highlightedword,
+              },
+            ],
+          },
         },
-        "site_name": {
-          "stringValue": currentLink
-        }
-      }
+        site_name: {
+          stringValue: currentLink,
+        },
+      },
     });
   }
-
-
 
   var requestOptions = {
     method: "POST",
@@ -125,34 +118,36 @@ function insertBaseDocument(highlightedword, backings, currentLink) {
 
 function deleteDocument(documentID) {
   var requestOptions = {
-    method: 'DELETE',
-    redirect: 'follow'
+    method: "DELETE",
+    redirect: "follow",
   };
 
   fetch("https://firestore.googleapis.com/v1/" + documentID, requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
 
 function appendDocument(jsonRaw) {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   var requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: jsonRaw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
-  console.log("RAWJSON")
-  console.log(jsonRaw)
+  console.log("RAWJSON");
+  console.log(jsonRaw);
 
-  fetch("https://firestore.googleapis.com/v1beta1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-
+  fetch(
+    "https://firestore.googleapis.com/v1beta1/projects/givemethesource/databases/(default)/documents/Sites",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
 
 function checkExisting() {
@@ -160,120 +155,225 @@ function checkExisting() {
     method: "GET",
     redirect: "follow",
   };
-  fetch("https://firestore.googleapis.com/v1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      const obj = JSON.parse(result)
-      console.log(document.URL)
-      console.log(obj.documents)
+  fetch(
+    "https://firestore.googleapis.com/v1/projects/givemethesource/databases/(default)/documents/Sites",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      const obj = JSON.parse(result);
+      console.log(document.URL);
+      console.log(obj.documents);
       for (x in obj.documents) {
-        console.log(obj.documents[x].fields.site_name.stringValue)
+        console.log(obj.documents[x].fields.site_name.stringValue);
         if (obj.documents[x].fields.site_name.stringValue == document.URL) {
-          checkStatus = true
-          console.log("exist")
+          checkStatus = true;
+          console.log("exist");
           for (y in obj.documents[x].fields.keywords.arrayValue.values) {
-            if (obj.documents[x].fields.keywords.arrayValue.values[y].stringValue == lastHighlightedText) {
+            if (
+              obj.documents[x].fields.keywords.arrayValue.values[y]
+                .stringValue == lastHighlightedText
+            ) {
               if (document.getElementById("GMTS_Form_Truth").value == "true") {
-                console.log(obj.documents[x].fields.backings.arrayValue.values[y])
-                if (obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.positiveBackings.arrayValue.values) {
-                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.positiveBackings.arrayValue.values.push({ stringValue: document.getElementById("GMTS_Form_URL").value })
+                console.log(
+                  obj.documents[x].fields.backings.arrayValue.values[y]
+                );
+                if (
+                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue
+                    .fields.positiveBackings.arrayValue.values
+                ) {
+                  obj.documents[x].fields.backings.arrayValue.values[
+                    y
+                  ].mapValue.fields.positiveBackings.arrayValue.values.push({
+                    stringValue: document.getElementById("GMTS_Form_URL").value,
+                  });
                 } else {
-                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.positiveBackings.arrayValue['values'] = [{ stringValue: document.getElementById("GMTS_Form_URL").value }]
+                  obj.documents[x].fields.backings.arrayValue.values[
+                    y
+                  ].mapValue.fields.positiveBackings.arrayValue["values"] = [
+                    {
+                      stringValue:
+                        document.getElementById("GMTS_Form_URL").value,
+                    },
+                  ];
                 }
-
               } else {
-                if (obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.negativeBackings.arrayValue.values) {
-                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.negativeBackings.arrayValue.values.push({ stringValue: document.getElementById("GMTS_Form_URL").value })
+                if (
+                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue
+                    .fields.negativeBackings.arrayValue.values
+                ) {
+                  obj.documents[x].fields.backings.arrayValue.values[
+                    y
+                  ].mapValue.fields.negativeBackings.arrayValue.values.push({
+                    stringValue: document.getElementById("GMTS_Form_URL").value,
+                  });
                 } else {
-                  obj.documents[x].fields.backings.arrayValue.values[y].mapValue.fields.negativeBackings.arrayValue['values'] = [{ stringValue: document.getElementById("GMTS_Form_URL").value }]
+                  obj.documents[x].fields.backings.arrayValue.values[
+                    y
+                  ].mapValue.fields.negativeBackings.arrayValue["values"] = [
+                    {
+                      stringValue:
+                        document.getElementById("GMTS_Form_URL").value,
+                    },
+                  ];
                 }
               }
 
-              appendDocument(JSON.stringify({ "fields": obj.documents[x].fields }))
-              deleteDocument(obj.documents[x].name)
+              appendDocument(
+                JSON.stringify({ fields: obj.documents[x].fields })
+              );
+              deleteDocument(obj.documents[x].name);
               return;
             }
           }
-          obj.documents[x].fields.keywords.arrayValue.values.push({ stringValue: lastHighlightedText })
+          obj.documents[x].fields.keywords.arrayValue.values.push({
+            stringValue: lastHighlightedText,
+          });
           if (document.getElementById("GMTS_Form_Truth").value == "true") {
             obj.documents[x].fields.backings.arrayValue.values.push({
-              "mapValue": {
-                "fields": {
-                  "negativeBackings": {
-                    "arrayValue": {
-                      "values": [
-
-                      ]
-                    }
+              mapValue: {
+                fields: {
+                  negativeBackings: {
+                    arrayValue: {
+                      values: [],
+                    },
                   },
-                  "positiveBackings": {
-                    "arrayValue": {
-                      "values": [
+                  positiveBackings: {
+                    arrayValue: {
+                      values: [
                         {
-                          "stringValue": document.getElementById("GMTS_Form_URL").value
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            })
+                          stringValue:
+                            document.getElementById("GMTS_Form_URL").value,
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            });
           } else {
             obj.documents[x].fields.backings.arrayValue.values.push({
-              "mapValue": {
-                "fields": {
-                  "negativeBackings": {
-                    "arrayValue": {
-                      "values": [
+              mapValue: {
+                fields: {
+                  negativeBackings: {
+                    arrayValue: {
+                      values: [
                         {
-                          "stringValue": document.getElementById("GMTS_Form_URL").value
-                        }
-                      ]
-                    }
+                          stringValue:
+                            document.getElementById("GMTS_Form_URL").value,
+                        },
+                      ],
+                    },
                   },
-                  "positiveBackings": {
-                    "arrayValue": {
-                      "values": [
-
-                      ]
-                    }
-                  }
-                }
-              }
-            })
-
+                  positiveBackings: {
+                    arrayValue: {
+                      values: [],
+                    },
+                  },
+                },
+              },
+            });
           }
-          console.log(obj.documents[x].fields.keywords.arrayValue.values)
-          console.log(obj.documents[x].fields.backings.arrayValue.values)
-          appendDocument(JSON.stringify({ "fields": obj.documents[x].fields }))
-          deleteDocument(obj.documents[x].name)
+          console.log(obj.documents[x].fields.keywords.arrayValue.values);
+          console.log(obj.documents[x].fields.backings.arrayValue.values);
+          appendDocument(JSON.stringify({ fields: obj.documents[x].fields }));
+          deleteDocument(obj.documents[x].name);
           return;
         }
       }
-      console.log("dont_exist")
-      insertBaseDocument(lastHighlightedText, document.getElementById("GMTS_Form_URL").value, document.URL)
+      console.log("dont_exist");
+      insertBaseDocument(
+        lastHighlightedText,
+        document.getElementById("GMTS_Form_URL").value,
+        document.URL
+      );
     })
     .catch((error) => console.log("error", error));
 }
 
-function retrieveBackings(){
+function retrieveBackings() {
   var requestOptions = {
     method: "GET",
     redirect: "follow",
   };
-  
-  fetch("https://firestore.googleapis.com/v1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      const obj = JSON.parse(result)
-      for(x in obj.documents){
-        if(obj.documents[x].fields.site_name.stringValue == document.URL){
+
+  fetch(
+    "https://firestore.googleapis.com/v1/projects/givemethesource/databases/(default)/documents/Sites",
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      const obj = JSON.parse(result);
+      for (x in obj.documents) {
+        if (obj.documents[x].fields.site_name.stringValue == document.URL) {
           DATA = obj.documents[x].fields;
-          return
+          return;
         }
       }
       DATA = {};
     })
     .catch((error) => console.log("error", error));
+}
 
+function openModal(modal) {
+  console.log("open modal");
+  modal.style.display = "block";
+
+  // load and populate table
+  var index = 0;
+  for (var i in DATA["keywords"]["arrayValue"]["values"]) {
+    console.log(DATA["keywords"]["arrayValue"]["values"][i]);
+    if (
+      DATA["keywords"]["arrayValue"]["values"][i]["stringValue"] ==
+      lastHighlightedText
+    ) {
+      break;
+    }
+    index++;
+  }
+
+  var backings =
+    DATA["backings"]["arrayValue"]["values"][index]["mapValue"]["fields"];
+
+  // iterate positive and add to table
+  var posTable = document.getElementById("pos_table");
+  for (var i in backings["positiveBackings"]["arrayValue"]["values"]) {
+    var string =
+      backings["positiveBackings"]["arrayValue"]["values"][i]["stringValue"];
+    posTable.innerHTML +=
+      `
+      <tr>
+      <td><a href=` +
+      string +
+      `>` +
+      string +
+      `</a></td>
+      </tr>
+    `;
+  }
+
+  var negTable = document.getElementById("neg_table");
+  for (var link in backings["negativeBackings"]["arrayValue"]["values"]) {
+    var string =
+      backings["negativeBackings"]["arrayValue"]["values"][i]["stringValue"];
+    negTable.innerHTML +=
+      `
+      <tr>
+      <td><a href=` +
+      string +
+      `>` +
+      string +
+      `</a></td>
+      </tr>
+  `;
+  }
+}
+
+function closeModal(modal) {
+  console.log("close modal");
+  modal.style.display = "none";
+
+  // empty out table
+  document.getElementById("pos_table").innerHTML = "";
+  document.getElementById("neg_table").innerHTML = "";
 }
