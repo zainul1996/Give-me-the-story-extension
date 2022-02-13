@@ -1,4 +1,7 @@
 // this code will be executed before page load
-(function() {
+(function () {
   console.log('before.js executed');
 })();
+
+let lastHighlightedText = "";
+

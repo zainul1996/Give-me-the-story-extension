@@ -158,7 +158,7 @@ function checkExisting() {
       }
       console.log("dont_exist");
       insertBaseDocument(
-        "highlighted text",
+        lastHighlightedText,
         document.getElementById("GMTS_Form_URL").value,
         document.URL
       );
