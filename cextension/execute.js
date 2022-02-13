@@ -52,5 +52,70 @@ function closeModal(modal) {
 }
 
 function submitToFirebase() {
-  console.log("submitting");
+  console.log(document.getElementById("backings").value);
+  insertBaseDocument("greetings",document.getElementById("backings").value,"https://code.peikai.pii.at/iframe?text=hello");
+}
+
+function insertBaseDocument(highlightedword, backings, currentLink){
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "fields": {
+      "backings": {
+        "arrayValue": {
+          "values": [
+            {
+              "mapValue": {
+                "fields": {
+                  "negativeBackings": {
+                    "arrayValue": {
+                      "values": [
+                        {
+                          "stringValue": backings
+                        }
+                      ]
+                    }
+                  },
+                  "positiveBackings": {
+                    "arrayValue": {
+                      "values": [
+                        {
+                          "stringValue": "link"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "keywords": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": highlightedword
+            }
+          ]
+        }
+      },
+      "site_name": {
+        "stringValue": currentLink
+      }
+    }
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://firestore.googleapis.com/v1beta1/projects/givemethesource/databases/(default)/documents/Sites", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
