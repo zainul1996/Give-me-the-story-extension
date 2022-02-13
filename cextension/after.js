@@ -70,6 +70,7 @@ function mouseUp() {
 
 console.log(lastHighlightedText);
 $("p, h1, h2, span, em, li").on("mouseup", function () {
+  console.log(this)
   var selection = getSelectedText();
   // check if selection is atleast 5 words long
   if (selection.split(" ").length > 5) {
