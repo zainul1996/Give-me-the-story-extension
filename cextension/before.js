@@ -4,11 +4,7 @@ var toggle = false;
 var hiddenhighlights = false;
 
 (function () {
-<<<<<<< HEAD
-  console.log('before.js executed');
-=======
   console.log("before.js executed");
->>>>>>> 2b2b13dab1377a0d2ec827acc22994a565af00df
   retrieveBackings();
 })();
 
