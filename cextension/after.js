@@ -39,7 +39,7 @@
     <div id="GMTS_Form" class=box>
       <h3 class="subtitle is-size-5">
           Add new source for 
-          <select id="Truth" name="truth">
+          <select id="GMTS_Form_Truth" name="GMTS_Form_Truth">
             <option value="true">True</option>
             <option value="false">False</option>
           </select>:
@@ -47,7 +47,7 @@
 
       <div class="has-text-centered">
         <label for="Truth">
-          <input class="input is-right" type='text' id='fname' name='fname'>
+          <input class="input is-right" type='text' id='GMTS_Form_URL' name='GMTS_Form_URL'>
         </label>
         <br>
         <button class="button is-small is-right" type='button' id='submit' name='submit'>Submit</button>
