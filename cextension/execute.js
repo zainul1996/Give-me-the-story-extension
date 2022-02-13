@@ -28,21 +28,22 @@
         console.log($element)
         var replacement = $("<span></span>")
           .attr({ class: "hl" })
-          .attr({
-            onclick:
-              'document.getElementById("highlightDialog").style.display = "block";return false;',
-          })
           .html(selection);
         var replacementHtml = $("<div>")
           .append(replacement.clone())
           .remove()
           .html();
         $($element).html($($element).html().replace(selection, replacementHtml));
+        $('.hl').on('click', (event) => {
+          lastHighlightedText = $(event.target).text()
+          openModal(document.getElementById("highlightDialog"));
+        })
       }
     }
   }
   else {
     toggle = false;
+    closeModal(document.getElementById("highlightDialog"));
     $(".hl").each(function () {
       $(this).removeClass("hl");
       $(this).addClass("nlh");

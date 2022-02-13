@@ -27,10 +27,10 @@
 
     <div id="GMTS_Form" class=box>
       <p class="subtitle is-size-5">
-          Submit your backings for 
+          Submit your sources 
           <select id="GMTS_Form_Truth" name="truth">
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">For</option>
+            <option value="false">Against</option>
           </select>:
       </p>
 
@@ -52,51 +52,52 @@
 
   document.body.appendChild(modal);
   modal.style.display = "none";
+
+
 })();
 
-function mouseUp() {
-  if (window.getSelection().toString() == "") {
-    console.log("there is no selected text");
-  } else {
-    console.log(window.getSelection().toString());
-    if (event.shiftKey) {
-      console.log("Shift held");
-      openModal();
-    } else {
-      console.log("Shift not held");
+
+// $("p, h1, h2, span, em, li").on("mouseup", function () {
+//   var selection = getSelectedText();
+//   console.log("in mouse up")
+//   // check if selection is atleast 5 words long
+//   if (selection.split(" ").length > 3) {
+//     lastHighlightedText = selection;
+//     console.log(lastHighlightedText);
+//     console.log(toggle)
+//     if (toggle) {
+//       var replacement = $("<span></span>").attr({ class: "hl" }).html(selection);
+//       var replacementHtml = $("<div>")
+//         .append(replacement.clone())
+//         .remove()
+//         .html();
+//       $(this).html($(this).html().replace(selection, replacementHtml));
+//       openModal(document.getElementById("highlightDialog"));
+//     }
+
+//   }
+// });
+
+$(document).on('mouseup', (e) => {
+  if (toggle) {
+    let selection = getSelectedText()
+    if (selection.split(" ").length > 3) {
+      lastHighlightedText = selection;
+      // console.log(lastHighlightedText);
+      // console.log(toggle)
+
+      // var replacement = $("<span></span>").attr({ class: "hl" }).html(selection);
+      // var replacementHtml = $("<div>")
+      //   .append(replacement.clone())
+      //   .remove()
+      //   .html();
+      // $(this).html($(this).html().replace(selection, replacementHtml));
+      openModal(document.getElementById("highlightDialog"));
+
     }
   }
-}
 
-console.log(lastHighlightedText);
-$("p, h1, h2, span, em, li").on("mouseup", function () {
-  console.log(this)
-  var selection = getSelectedText();
-  // check if selection is atleast 5 words long
-  if (selection.split(" ").length > 5) {
-    lastHighlightedText = selection;
-    console.log(lastHighlightedText);
-    var replacement = $("<span></span>").attr({ class: "hl" }).html(selection);
-
-
-    var replacementHtml = $("<div>")
-      .append(replacement.clone())
-      .remove()
-      .html();
-    $(this).html($(this).html().replace(selection, replacementHtml));
-    openModal(document.getElementById("highlightDialog"));
-  }
-});
-
-// if class hl is clicked
-$(".hl").on("click", function () {
-  console.log("clicked");
-  if (document.getElementById("highlightDialog").style.display == "none") {
-    document.getElementById("highlightDialog").style.display = "block";
-  } else {
-    document.getElementById("highlightDialog").style.display = "none";
-  }
-});
+})
 
 //Grab selected text
 function getSelectedText() {
@@ -144,19 +145,50 @@ $("#submit").click(function () {
   var url = document.getElementById("GMTS_Form_URL").value;
   if (!url.includes("https://ieeexplore.ieee.org/document/")) {
     alert("Only sources from ieee was accepted");
+    return;
   }
+  var truth_val = $('#GMTS_Form_Truth').find(":selected").value;
 
-  var posTable = document.getElementById("pos_table");
-  posTable.innerHTML +=
-    `
+  if (truth_val == "true") {
+    var posTable = document.getElementById("pos_table");
+    posTable.innerHTML +=
+      `
       <tr>
       <td><a href=` +
-    url +
-    `>` +
-    url +
-    `</a></td>
+      url +
+      `>` +
+      url +
+      `</a></td>
       </tr>
     `;
+
+  } else {
+    var negTable = document.getElementById("neg_table");
+    negTable.innerHTML +=
+      `
+      <tr>
+      <td><a href=` +
+      url +
+      `>` +
+      url +
+      `</a></td>
+      </tr>
+    `;
+  }
+
+  $element = $('div>:contains(' + lastHighlightedText + ')')
+  console.log($element)
+  var replacement = $("<span></span>")
+    .attr({ class: "hl" })
+    .html(lastHighlightedText);
+  var replacementHtml = $("<div>")
+    .append(replacement.clone())
+    .remove()
+    .html();
+  $($element).html($($element).html().replace(lastHighlightedText, replacementHtml));
+  $('.hl').on('click', (event) => {
+    openModal(document.getElementById("highlightDialog"));
+  })
 
   console.log("Checking existing");
   checkExisting();

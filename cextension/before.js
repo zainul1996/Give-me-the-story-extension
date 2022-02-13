@@ -317,17 +317,40 @@ function retrieveBackings() {
       }
       DATA = {};
     })
+    .then(() => {
+      for (var item in DATA["keywords"]["arrayValue"]["values"]) {
+        selection = DATA["keywords"]["arrayValue"]["values"][item]["stringValue"]
+        $element = $('div>:contains(' + selection + ')')
+        console.log($element)
+        var replacement = $("<span></span>")
+          .attr({ class: "hl" })
+          .attr({
+            onclick:
+              'openModal(document.getElementById("highlightDialog"));',
+          })
+          .html(selection);
+        var replacementHtml = $("<div>")
+          .append(replacement.clone())
+          .remove()
+          .html();
+        if (toggle) {
+          $($element).html($($element).html().replace(selection, replacementHtml));
+        }
+      }
+    })
     .catch((error) => console.log("error", error));
 }
 
 function openModal(modal) {
   console.log("open modal");
+  console.log("selected word" + lastHighlightedText)
+  document.getElementById("pos_table").innerHTML = "";
+  document.getElementById("neg_table").innerHTML = "";
   modal.style.display = "block";
 
   // load and populate table
   var index = 0;
   for (var i in DATA["keywords"]["arrayValue"]["values"]) {
-    console.log(DATA["keywords"]["arrayValue"]["values"][i]);
     if (
       DATA["keywords"]["arrayValue"]["values"][i]["stringValue"] ==
       lastHighlightedText
@@ -358,9 +381,9 @@ function openModal(modal) {
   }
 
   var negTable = document.getElementById("neg_table");
-  for (var link in backings["negativeBackings"]["arrayValue"]["values"]) {
-    var string =
-      backings["negativeBackings"]["arrayValue"]["values"][i]["stringValue"];
+  for (var i in backings["negativeBackings"]["arrayValue"]["values"]) {
+    console.log(backings["negativeBackings"]["arrayValue"]["values"][i])
+    var string = backings["negativeBackings"]["arrayValue"]["values"][i]["stringValue"];
     negTable.innerHTML +=
       `
       <tr>
