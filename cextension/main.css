@@ -29,8 +29,17 @@
   width: 95%;
 }
 
+.GMTS_Table {
+  height: 25%;
+  overflow: scroll;
+}
+
+.GMTS_Table::-webkit-scrollbar {
+  display: none;
+}
+
 .modalFooter {
-  height: 10%;
+  height: 5%;
   width: 100%;
   position: absolute;
   bottom: 0px;
