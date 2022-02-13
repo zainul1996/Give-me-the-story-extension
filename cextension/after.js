@@ -27,7 +27,7 @@
 
     <div id="GMTS_Form" class=box>
       <p class="subtitle is-size-5">
-          Add new source for 
+          Submit your backings for 
           <select id="GMTS_Form_Truth" name="truth">
             <option value="true">True</option>
             <option value="false">False</option>
@@ -36,7 +36,7 @@
 
       <div class="has-text-centered">
         <label for="Truth">
-          <input class="input is-right" type='text' id='GMTS_Form_URL' name='fname'>
+          <input class="input is-right" type='text' id='GMTS_Form_URL' placeholder="https://ieeexplore.ieee.org/document/9254002" name='fname'>
         </label>
         <br>
         <button class="button is-small is-right" type='button' id='submit' name='submit'>Submit</button>
